@@ -23,12 +23,35 @@ const footer=document.createElement("footer");footer.className="site-footer";foo
 const nav=document.getElementById("site-nav"),toggle=document.querySelector(".mobile-nav-toggle");
 if(toggle&&nav){toggle.addEventListener("click",()=>{const open=nav.classList.toggle("open");toggle.setAttribute("aria-expanded",String(open))})}
 
+/* Monster Compendium: render the structured core statblock as real tables. */
+if(document.querySelector(".monster-section")){
+ document.querySelectorAll(".monster-section .ability-grid").forEach(grid=>{
+  if(grid.dataset.tableReady)return;
+  const cells=[...grid.querySelectorAll(".ability")];
+  if(!cells.length)return;
+  const table=document.createElement("table");table.className="statblock-table ability-table";
+  const thead=document.createElement("thead"),hr=document.createElement("tr");
+  cells.forEach(c=>{const th=document.createElement("th");th.textContent=c.querySelector("span")?.textContent.trim()||"";hr.appendChild(th)});thead.appendChild(hr);
+  const tbody=document.createElement("tbody"),vr=document.createElement("tr");
+  cells.forEach(c=>{const td=document.createElement("td");td.textContent=c.querySelector("strong")?.textContent.trim()||"";vr.appendChild(td)});tbody.appendChild(vr);
+  table.append(thead,tbody);grid.replaceWith(table);
+ });
+ document.querySelectorAll(".monster-section .stat-facts").forEach(facts=>{
+  if(facts.dataset.tableReady)return;
+  const rows=[...facts.children];if(!rows.length)return;
+  const table=document.createElement("table");table.className="statblock-table facts-table";
+  const tbody=document.createElement("tbody");
+  rows.forEach(row=>{const strong=row.querySelector("strong");const tr=document.createElement("tr");const th=document.createElement("th");th.textContent=(strong?.textContent||"").replace(/\\.$/,"");const td=document.createElement("td");if(strong){const clone=row.cloneNode(true);clone.querySelector("strong")?.remove();td.textContent=clone.textContent.trim()}else td.textContent=row.textContent.trim();tr.append(th,td);tbody.appendChild(tr)});
+  table.appendChild(tbody);facts.replaceWith(table);
+ });
+}
+
 const input=document.querySelector("[data-site-search]"),results=document.querySelector("[data-search-results]");
 if(input&&results){
 const pages=[["World","world/","Regions, geography, history, factions, and locations."],["Lords","lords/","Lords Compendium and GM-facing Lord information."],["Monsters","monsters/","Monster Compendium, ranks, lore, tactics, habitats, and loot."],["NPCs","npcs/","NPC Compendium, factions, merchants, secrets, and relationships."],["Tables","tables/","Weapon roll tables, loot tables, equipment references, and generators."],["Encounters","encounters/","Encounter references and random encounter support."],["Campaign","campaign/","Campaign timeline, missions, factions, locations, and secrets."],["GM Tools","tools/","Quick-reference utilities and GM tools."]];
-const render=q=>{const term=q.trim().toLowerCase();if(!term){results.classList.remove("active");results.innerHTML="";return}const hits=pages.filter(x=>x.join(" ").toLowerCase().includes(term));results.innerHTML='<div class="search-summary">'+hits.length+" result"+(hits.length===1?"":"s")+"</div>"+(hits.length?hits.map(x=>'<a class="search-result" href="'+base+x[1]+'"><strong>'+x[0]+'</strong><small>'+x[2]+'</small></a>').join(""):'<div class="search-result"><strong>No result</strong><small>Try another term.</small></div>');results.classList.add("active")};input.addEventListener("input",e=>render(e.target.value));input.addEventListener("keydown",e=>{if(e.key==="Escape"){input.value="";render("")}});document.addEventListener("click",e=>{if(!e.target.closest(".search-box"))results.classList.remove("active")})}
+const render=q=>{const term=q.trim().toLowerCase();if(!term){results.classList.remove("active");results.innerHTML="";return}const hits=pages.filter(x=>x.join(" ").toLowerCase().includes(term));results.innerHTML='<div class="search-summary">'+hits.length+" result"+(hits.length===1?"":"s")+"</div>"+(hits.length?hits.map(x=>'<a class="search-result" href="'+base+x[1]+'"><strong>'+x[0]+"</strong><small>"+x[2]+"</small></a>").join(""):'<div class="search-result"><strong>No result</strong><small>Try another term.</small></div>');results.classList.add("active")};input.addEventListener("input",e=>render(e.target.value));input.addEventListener("keydown",e=>{if(e.key==="Escape"){input.value="";render("")}});document.addEventListener("click",e=>{if(!e.target.closest(".search-box"))results.classList.remove("active")})}
 
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register(base+"sw.js?v=5",{scope:base,updateViaCache:"none"}).then(r=>r.update()).catch(e=>console.warn("WoA GM offline service worker could not be registered:",e)))}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register(base+"sw.js?v=7",{scope:base,updateViaCache:"none"}).then(r=>r.update()).catch(e=>console.warn("WoA GM offline service worker could not be registered:",e)))}
 
 let deferredInstallPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstallPrompt=e;if(document.querySelector(".pwa-install-button"))return;const b=document.createElement("button");b.type="button";b.className="pwa-install-button";b.textContent="Install WoA GM";b.setAttribute("aria-label","Install Wings of Atreia GM Reference for offline use");b.addEventListener("click",async()=>{if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();try{await deferredInstallPrompt.userChoice}catch(_){}deferredInstallPrompt=null;b.remove()});document.body.appendChild(b)});window.addEventListener("appinstalled",()=>{deferredInstallPrompt=null;document.querySelector(".pwa-install-button")?.remove()});
 });
