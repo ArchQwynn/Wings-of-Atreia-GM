@@ -1,0 +1,13 @@
+{
+  "name": "Wings of Atreia — GM Reference",
+  "short_name": "WoA GM",
+  "description": "Offline-capable GM reference for Wings of Atreia.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "lang": "en",
+  "categories": ["games", "reference", "books"]
+}
