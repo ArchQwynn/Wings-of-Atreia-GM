@@ -1,7 +1,8 @@
-const CACHE_NAME = 'woa-gm-v1';
+const CACHE_NAME = 'woa-gm-v2';
 const APP_SHELL = [
   './', './index.html', './manifest.json', './offline.html',
   './assets/css/style.css', './assets/js/site.js',
+  './assets/icons/icon-192.svg', './assets/icons/icon-512.svg',
   './world/', './world/index.html', './world/overview.html', './world/elysea.html', './world/asmodae.html', './world/abyss.html', './world/history.html', './world/factions.html',
   './lords/', './monsters/', './npcs/', './tables/', './encounters/', './campaign/', './tools/'
 ];
