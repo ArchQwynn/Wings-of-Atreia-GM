@@ -23,13 +23,12 @@ const footer=document.createElement("footer");footer.className="site-footer";foo
 const nav=document.getElementById("site-nav"),toggle=document.querySelector(".mobile-nav-toggle");
 if(toggle&&nav){toggle.addEventListener("click",()=>{const open=nav.classList.toggle("open");toggle.setAttribute("aria-expanded",String(open))})}
 
-/* Monster Compendium: render the structured core statblock as real tables. */
+/* Monster Compendium: convert the structured core statblock into real, readable tables. */
 if(document.querySelector(".monster-section")){
  document.querySelectorAll(".monster-section .ability-grid").forEach(grid=>{
-  if(grid.dataset.tableReady)return;
   const cells=[...grid.querySelectorAll(".ability")];
   if(!cells.length)return;
-  const table=document.createElement("table");table.className="statblock-table ability-table";
+  const table=document.createElement("table");table.className="rank-table statblock-table ability-table";
   const thead=document.createElement("thead"),hr=document.createElement("tr");
   cells.forEach(c=>{const th=document.createElement("th");th.textContent=c.querySelector("span")?.textContent.trim()||"";hr.appendChild(th)});thead.appendChild(hr);
   const tbody=document.createElement("tbody"),vr=document.createElement("tr");
@@ -37,9 +36,8 @@ if(document.querySelector(".monster-section")){
   table.append(thead,tbody);grid.replaceWith(table);
  });
  document.querySelectorAll(".monster-section .stat-facts").forEach(facts=>{
-  if(facts.dataset.tableReady)return;
   const rows=[...facts.children];if(!rows.length)return;
-  const table=document.createElement("table");table.className="statblock-table facts-table";
+  const table=document.createElement("table");table.className="rank-table statblock-table facts-table";
   const tbody=document.createElement("tbody");
   rows.forEach(row=>{const strong=row.querySelector("strong");const tr=document.createElement("tr");const th=document.createElement("th");th.textContent=(strong?.textContent||"").replace(/\\.$/,"");const td=document.createElement("td");if(strong){const clone=row.cloneNode(true);clone.querySelector("strong")?.remove();td.textContent=clone.textContent.trim()}else td.textContent=row.textContent.trim();tr.append(th,td);tbody.appendChild(tr)});
   table.appendChild(tbody);facts.replaceWith(table);
