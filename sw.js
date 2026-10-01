@@ -1,4 +1,4 @@
-const CACHE_NAME='woa-gm-v5';
+const CACHE_NAME='woa-gm-v6';
 const APP_SHELL=['./','./index.html','./manifest.json','./offline.html','./assets/css/style.css','./assets/js/site.js','./assets/icons/icon.svg','./world/','./world/index.html','./world/overview.html','./world/elysea.html','./world/asmodae.html','./world/abyss.html','./world/history.html','./world/factions.html','./lords/','./monsters/','./monsters/index.html','./monsters/families.html','./monsters/family.html','./monsters/data.js','./monsters/gm-reference.html','./monsters/rank-standard.html','./monsters/rank-veteran.html','./monsters/rank-elite.html','./monsters/rank-boss.html','./monsters/abex.html','./monsters/airon.html','./monsters/ampha.html','./npcs/','./tables/','./encounters/','./campaign/','./tools/'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(APP_SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
