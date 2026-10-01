@@ -1,19 +1,10 @@
-const CACHE_NAME = 'woa-gm-v3';
+const CACHE_NAME = 'woa-gm-v4';
 const APP_SHELL = [
-  './', './index.html', './manifest.json', './offline.html', './assets/css/style.css', './assets/js/site.js', './assets/icons/icon.svg',
-  './world/', './world/index.html', './world/overview.html', './world/elysea.html', './world/asmodae.html', './world/abyss.html', './world/history.html', './world/factions.html',
-  './lords/', './monsters/', './monsters/index.html', './monsters/families.html', './monsters/family.html', './monsters/gm-reference.html', './monsters/rank-standard.html', './monsters/rank-veteran.html', './monsters/rank-elite.html', './monsters/rank-boss.html',
-  './npcs/', './tables/', './encounters/', './campaign/', './tools/'
+  './','./index.html','./manifest.json','./offline.html','./assets/css/style.css','./assets/js/site.js','./assets/icons/icon.svg',
+  './world/','./world/index.html','./world/overview.html','./world/elysea.html','./world/asmodae.html','./world/abyss.html','./world/history.html','./world/factions.html',
+  './lords/','./monsters/','./monsters/index.html','./monsters/families.html','./monsters/family.html','./monsters/data.js','./monsters/gm-reference.html','./monsters/rank-standard.html','./monsters/rank-veteran.html','./monsters/rank-elite.html','./monsters/rank-boss.html','./monsters/abex.html','./monsters/airon.html','./monsters/ampha.html',
+  './npcs/','./tables/','./encounters/','./campaign/','./tools/'
 ];
-self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting())); });
-self.addEventListener('activate', event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  const request = event.request; const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
-  if (request.mode === 'navigate') {
-    event.respondWith(fetch(request).then(response => { const copy=response.clone(); caches.open(CACHE_NAME).then(c=>c.put(request,copy)); return response; }).catch(() => caches.match(request).then(c => c || caches.match('./offline.html'))));
-    return;
-  }
-  event.respondWith(caches.match(request).then(c => c || fetch(request).then(response => { const copy=response.clone(); caches.open(CACHE_NAME).then(cache=>cache.put(request,copy)); return response; }).catch(() => caches.match('./offline.html'))));
-});
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_SHELL)).then(()=>self.skipWaiting()))});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;const request=event.request,url=new URL(request.url);if(url.origin!==self.location.origin)return;if(request.mode==='navigate'){event.respondWith(fetch(request).then(response=>{const copy=response.clone();caches.open(CACHE_NAME).then(c=>c.put(request,copy));return response}).catch(()=>caches.match(request).then(c=>c||caches.match('./offline.html'))));return}event.respondWith(caches.match(request).then(c=>c||fetch(request).then(response=>{const copy=response.clone();caches.open(CACHE_NAME).then(cache=>cache.put(request,copy));return response}).catch(()=>caches.match('./offline.html'))))});
