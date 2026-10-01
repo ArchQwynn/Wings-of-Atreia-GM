@@ -1,0 +1,1 @@
+window.WOA_MONSTERS = "+__import__('path').readFileSync('/mnt/data/monstercomp/monsters-data.js','utf8').replace(/^window\.WOA_MONSTERS = /,'').trim()+";
