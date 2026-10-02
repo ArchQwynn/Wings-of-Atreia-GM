@@ -1,10 +1,10 @@
-const CACHE_NAME = 'woa-gm-v3';
+const CACHE_NAME = 'woa-gm-v4';
 const APP_SHELL = [
   './', './index.html', './manifest.json', './offline.html',
   './assets/css/style.css', './assets/js/site.js',
   './assets/icons/icon-192.svg', './assets/icons/icon-512.svg',
   './world/', './world/index.html', './world/overview.html', './world/elysea.html', './world/asmodae.html', './world/abyss.html', './world/history.html', './world/factions.html',
-  './lords/', './lords/empyrean.html', './lords/dragon.html', './lords/encyclopedia.html', './lords/statblocks.html', './lords/lord-page.js',
+  './lords/', './lords/empyrean.html', './lords/dragon.html', './lords/encyclopedia.html', './lords/statblocks.html', './lords/roles.html', './lords/lord-page.js',
   './lords/empyrean/ariel.html', './lords/empyrean/kaisinel.html', './lords/empyrean/nezekan.html', './lords/empyrean/vaizel.html', './lords/empyrean/yustiel.html', './lords/empyrean/azphel.html', './lords/empyrean/lumiel.html', './lords/empyrean/marchutan.html', './lords/empyrean/triniel.html', './lords/empyrean/zikel.html', './lords/empyrean/israphel.html', './lords/empyrean/siel.html',
   './lords/dragon/fregion.html', './lords/dragon/meslamtaeda.html', './lords/dragon/ereshkigal.html', './lords/dragon/beritra.html', './lords/dragon/tiamat.html', './lords/dragon/apsu.html',
   './monsters/', './npcs/', './tables/', './encounters/', './campaign/', './tools/'
