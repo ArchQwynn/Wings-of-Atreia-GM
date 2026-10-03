@@ -1,4 +1,4 @@
-const CACHE_NAME = 'woa-gm-v9';
+const CACHE_NAME = 'woa-gm-v10';
 const APP_SHELL = [
   './', './index.html', './manifest.json', './offline.html',
   './assets/css/style.css', './assets/js/site.js',
@@ -7,7 +7,7 @@ const APP_SHELL = [
   './lords/', './lords/empyrean.html', './lords/dragon.html', './lords/encyclopedia.html', './lords/statblocks.html', './lords/roles.html', './lords/roles/', './lords/roles/index.html', './lords/lord-page.js',
   './lords/empyrean/ariel.html', './lords/empyrean/kaisinel.html', './lords/empyrean/nezekan.html', './lords/empyrean/vaizel.html', './lords/empyrean/yustiel.html', './lords/empyrean/azphel.html', './lords/empyrean/lumiel.html', './lords/empyrean/marchutan.html', './lords/empyrean/triniel.html', './lords/empyrean/zikel.html', './lords/empyrean/israphel.html', './lords/empyrean/siel.html',
   './lords/dragon/fregion.html', './lords/dragon/meslamtaeda.html', './lords/dragon/ereshkigal.html', './lords/dragon/beritra.html', './lords/dragon/tiamat.html', './lords/dragon/apsu.html',
-  './monsters/', './npcs/', './tables/', './tables/index.html', './tables/roll.html', './tables/common-equipment.html', './tables/common-equipment-roller.html', './tables/common-equipment-data.js', './tables/common-equipment-data-2.js', './tables/common-equipment-data-3.js', './tables/loot.html', './encounters/', './campaign/', './tools/'
+  './monsters/', './npcs/', './tables/', './tables/index.html', './tables/roll.html', './tables/common-equipment.html', './tables/common-equipment-roller.html', './tables/common-equipment-data.js', './tables/common-equipment-data-2.js', './tables/common-equipment-data-3.js', './tables/common-equipment-data-10.js', './tables/common-equipment-data-11.js', './tables/common-equipment-data-12.js', './tables/common-equipment-data-13.js', './tables/common-equipment-data-14.js', './tables/common-equipment-data-15.js', './tables/common-equipment-data-16.js', './tables/common-equipment-data-17.js', './tables/common-equipment-data-18.js', './tables/common-equipment-data-19.js', './tables/common-equipment-data-20.js', './tables/common-equipment-data-21.js', './tables/common-equipment-data-22.js', './tables/common-equipment-data-23.js', './tables/common-equipment-data-24.js', './tables/common-equipment-data-25.js', './tables/common-equipment-data-26.js', './tables/common-equipment-data-27.js', './tables/loot.html', './encounters/', './campaign/', './tools/'
 ];
 self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))).then(() => self.clients.claim())); });
