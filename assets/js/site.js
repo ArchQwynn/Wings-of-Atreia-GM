@@ -20,6 +20,9 @@ if(!document.querySelector(".site-footer")){
 const footer=document.createElement("footer");footer.className="site-footer";footer.textContent='Wings of Atreia · GM Reference · Created & Designed by Clark Michael Zafra (“ArchQwynn”) · Non-commercial fan project.';body.appendChild(footer);
 }
 
+/* Lord Encyclopedia: load its dedicated spacing/layout rules without changing the shared GM stylesheet. */
+if(document.querySelector(".lord-encyclopedia-grid")){const lordCss=document.createElement("link");lordCss.rel="stylesheet";lordCss.href=base+"assets/css/lords.css";document.head.appendChild(lordCss)}
+
 const nav=document.getElementById("site-nav"),toggle=document.querySelector(".mobile-nav-toggle");
 if(toggle&&nav){toggle.addEventListener("click",()=>{const open=nav.classList.toggle("open");toggle.setAttribute("aria-expanded",String(open))})}
 
