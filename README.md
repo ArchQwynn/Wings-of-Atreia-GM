@@ -21,9 +21,9 @@ This repository is for GM/world material and tools. It does **not** duplicate th
 
 ## Mechanics boundary
 
-The main [Wings of Atreia player website](https://archqwynn.github.io/Wings-of-Atreia/) remains the authoritative player-facing mechanics reference.
+The [Wings of Atreia player website](https://archqwynn.github.io/Wings-of-Atreia/) is the single authority for current approved player-facing mechanics. The latest approved website mechanic supersedes any conflicting older rule text, including previously published or copied wording. Books and the Character Manager must be corrected to match the website; this GM repository must not be used to reinstate an older player mechanic.
 
-GM/world content, Lords, monsters, NPCs, tables, campaign material, and GM utilities belong here.
+GM/world content, Lords, monsters, NPCs, tables, campaign material, and GM utilities belong here. GM-only lore and bespoke encounter content may remain here; any shared/player-facing procedure must follow the current player website mechanics. A later non-mechanical site commit does not itself approve a rules change.
 
 ## Offline / PWA
 
